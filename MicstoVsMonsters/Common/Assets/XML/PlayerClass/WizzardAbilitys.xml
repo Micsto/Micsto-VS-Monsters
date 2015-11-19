@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfAbility xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ability ID="1" Name="Wand Attack" Description="Hard Hit With your Wand" Damage="2" AbilityLvL="1" PlayerClassID="2" />
+  <Ability ID="1" Name="Arcane Missiles" Description="Launch Arcane missiles at your enemy" Damage="2" AbilityLvL="1" PlayerClassID="2" />
+  <Ability ID="1" Name="Arcane Shield" Description="Absorbe Damage" Damage="2" AbilityLvL="1" PlayerClassID="2" />
+</ArrayOfAbility>

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="MicstoVsMonsters.View.ucPlayerAbilityButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MicstoVsMonsters.View"
+             xmlns:model="clr-namespace:MicstoVsMonsters.Model"
+             xmlns:viewModel="clr-namespace:MicstoVsMonsters.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance model:Ability}">
+    <Grid>
+        <Button Width="80" Margin="0,0,0,20" Height="20" 
+                Content="{Binding Name}"
+				Background="White" 
+			    Command="{Binding AttackWithAbilityCommand,
+                RelativeSource={RelativeSource FindAncestor,
+                AncestorType={x:Type viewModel:GameViewViewModel}}}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"
+				Foreground="Black">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</UserControl>

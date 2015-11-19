@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAbility xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ability ID="1" Name="Dynamite" Description="Shoots a dynamite at you" Damage="10" AbilityLvL="0" PlayerClassID="0" MonsterID="4" />
+  <Ability ID="2" Name="Toxic Gas" Description="Throws Toxic Gas in your face" Damage="5" AbilityLvL="0" PlayerClassID="0" MonsterID="4" />
+  <Ability ID="3" Name="Eletric Shock" Description="Electic shocks you" Damage="10" AbilityLvL="0" PlayerClassID="0" MonsterID="4" />
+</ArrayOfAbility>

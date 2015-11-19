@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayerClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlayerClass ID="1" Name="Warrior" Description="Durable, High Burst Damage" />
+  <PlayerClass ID="2" Name="Wizzard" Description="Evasive, High Burst Damage" />
+  <PlayerClass ID="3" Name="Programmer" Description="Sarcastic, A-social, Can Move well in the darkness" />
+</ArrayOfPlayerClass>

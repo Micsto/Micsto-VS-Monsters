@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAbility xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ability ID="1" Name="Melee Attack" Description="Hard Hit With your Weapon" Damage="3" AbilityLvL="1" PlayerClassID="3" />
+  <Ability ID="1" Name="Sarcasm" Description="Annoy your enemys to death" Damage="3" AbilityLvL="1" PlayerClassID="3" />
+  <Ability ID="1" Name="Hacking" Description="Hack your enemys Facebook and destroy his/hers personal life" Damage="3" AbilityLvL="1" PlayerClassID="3" />
+</ArrayOfAbility>

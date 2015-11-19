@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAbility xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ability ID="1" Name="Frost Bolt" Description="Shoots a frost bolt at you" Damage="10" AbilityLvL="0" PlayerClassID="0" MonsterID="3" />
+  <Ability ID="2" Name="Arcane Blast" Description="Cast an arcane blast at you" Damage="5" AbilityLvL="0" PlayerClassID="0" MonsterID="3" />
+  <Ability ID="3" Name="Throws Magic Bowl" Description="Throws his magic bowl at you" Damage="10" AbilityLvL="0" PlayerClassID="0" MonsterID="3" />
+</ArrayOfAbility>

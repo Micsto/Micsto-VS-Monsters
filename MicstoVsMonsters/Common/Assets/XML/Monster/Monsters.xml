@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMonster xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Monster ID="1" Name="Succubus" Health="10" />
+  <Monster ID="2" Name="Demented Monk" Health="15" />
+  <Monster ID="3" Name="Schizofrenic Wizzard" Health="20" />
+  <Monster ID="4" Name="Mad Technician" Health="25" />
+  <Monster ID="5" Name="Overprotective Father Earth" Health="30" />
+</ArrayOfMonster>

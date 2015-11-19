@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAbility xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ability ID="1" Name="EarthShock" Description="Makes the earth tremble" Damage="10" AbilityLvL="0" PlayerClassID="0" MonsterID="5" />
+  <Ability ID="2" Name="Water Blast" Description="Blast Water in your face" Damage="5" AbilityLvL="0" PlayerClassID="0" MonsterID="5" />
+  <Ability ID="3" Name="Tornado" Description="Cast a tornado around you" Damage="10" AbilityLvL="0" PlayerClassID="0" MonsterID="5" />
+</ArrayOfAbility>
