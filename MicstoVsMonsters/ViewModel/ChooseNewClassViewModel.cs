@@ -27,7 +27,8 @@ namespace MicstoVsMonsters.ViewModel
             foreach (var PlayerClass in ListOfPlayerClasses)
             {
                 // TODO: Make this string more generic. not hard coded where the path is.
-                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + PlayerClass.Name + ".png";
+                // Write the exact path here for your images. Havent figured out how to make this generic
+                // ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + PlayerClass.Name + ".png";
                 PlayerClass.ClassImage = ClassImage;
             }
             PlayerClassAbilitys = new ObservableCollection<Ability>();
@@ -142,6 +143,6 @@ namespace MicstoVsMonsters.ViewModel
             AddRange(PlayerClassAbilitys, temp3);
         }
 
-        
+
     }
 }

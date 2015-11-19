@@ -47,7 +47,8 @@ namespace MicstoVsMonsters.ViewModel
             {
                 _selectedPlayerClass = value;
                 OnPropertyChanged(nameof(SelectedPlayerClass));
-                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
+                // Write the exact path here for your images. Havent figured out how to make this generic
+                //   ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
                 NewPlayer.PlayersClass = SelectedPlayerClass;
 
             }

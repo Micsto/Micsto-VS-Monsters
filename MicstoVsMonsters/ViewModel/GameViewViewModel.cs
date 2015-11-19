@@ -39,7 +39,8 @@ namespace MicstoVsMonsters.ViewModel
             Monsters = new ObservableCollection<Monster>(ReadXML(@"Common\Assets\XML\Monster\Monsters.xml", Monsters));
             foreach (var monster in Monsters)
             {
-                MonsterImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\Monster\" + monster.Name + ".png";
+               // Write the exact path here for your images. Havent figured out how to make this generic
+               // MonsterImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\Monster\" + monster.Name + ".png";
                 monster.MonsterImage = MonsterImage;
                 MonsterImages.Add(MonsterImage);
             }
@@ -150,7 +151,8 @@ namespace MicstoVsMonsters.ViewModel
             {
                 _selectedPlayerClass = value;
                 OnPropertyChanged(nameof(SelectedPlayerClass));
-                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
+                // Write the exact path here for your images. Havent figured out how to make this generic
+                //  ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
                 PlayerAbilitys = SelectedPlayerClass.Abilitys;
             }
         }
