@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="MicstoVsMonsters.View.GameOverViewxaml"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MicstoVsMonsters.View"
+             mc:Ignorable="d" 
+                Height="500" Width="800">
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="1" />
+            <GradientStop Color="White" />
+        </LinearGradientBrush>
+    </UserControl.Background>
+    <Grid>
+        <StackPanel>
+            <TextBlock FontFamily="Arial" FontSize="40" 
+				   Text="You Died, Sorry. Thank You For Playing"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Top" Margin="0,50,0,0"/>
+
+            <TextBlock FontFamily="Arial" FontSize="40" 
+				   Text="Micsto VS Monsters"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Top" Margin="0,50,0,0"/>
+
+            <Button Width="200" Height="20" Content="Main Menu"
+					Margin="0,70,0,0" Background="White" 
+					Command="{Binding GoBackToMainMenuCommand}"
+					Foreground="Black">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Width="200" Height="20" Content="Exit Game"
+					Margin="0,70,0,0" Background="White" 
+					Command="{Binding ExitGameCommand}"
+					Foreground="Black">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

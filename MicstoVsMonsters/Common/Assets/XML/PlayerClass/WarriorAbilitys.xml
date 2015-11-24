@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAbility xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Ability ID="1" Name="Melee Attack" Description="Hard Hit With your Weapon" Damage="1" AbilityLvL="1" PlayerClassID="1" />
-  <Ability ID="1" Name="Shout" Description="Scream To make yourself strong for 2 turns" Damage="1" AbilityLvL="1" PlayerClassID="1" />
-  <Ability ID="1" Name="Charge" Description="Charge your enemy" Damage="1" AbilityLvL="1" PlayerClassID="1" />
+  <Ability ID="1" Name="Melee Attack" Description="Hard Hit With your Weapon" Damage="10" AbilityLvL="1" PlayerClassID="1" />
+  <Ability ID="2" Name="Shout" Description="Scream To make yourself strong for 2 turns" Damage="15" AbilityLvL="1" PlayerClassID="1" />
+  <Ability ID="3" Name="Charge" Description="Charge your enemy" Damage="10" AbilityLvL="1" PlayerClassID="1" />
 </ArrayOfAbility>

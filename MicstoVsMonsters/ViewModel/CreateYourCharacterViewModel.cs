@@ -1,6 +1,7 @@
 ﻿using MicstoVsMonsters.Common;
 using MicstoVsMonsters.Model;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MicstoVsMonsters.ViewModel
@@ -48,7 +49,7 @@ namespace MicstoVsMonsters.ViewModel
                 _selectedPlayerClass = value;
                 OnPropertyChanged(nameof(SelectedPlayerClass));
                 // Write the exact path here for your images. Havent figured out how to make this generic
-                //   ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
+                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
                 NewPlayer.PlayersClass = SelectedPlayerClass;
 
             }
@@ -78,7 +79,14 @@ namespace MicstoVsMonsters.ViewModel
                 {
                     Execute = () =>
                     {
-                        Navigate(new GameViewViewModel { Navigate = Navigate, NewPlayer = NewPlayer, SelectedPlayerClass = SelectedPlayerClass });
+                        if (NewPlayer.Name != null)
+                        {
+                            Navigate(new GameViewViewModel { Navigate = Navigate, NewPlayer = NewPlayer, SelectedPlayerClass = SelectedPlayerClass });
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please write your characters name!");
+                        }
                     }
 
                 });

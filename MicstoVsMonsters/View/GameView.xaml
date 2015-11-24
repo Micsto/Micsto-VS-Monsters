@@ -20,11 +20,12 @@
     </UserControl.Background>
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Label x:Name="MonsterHealth" Content="{Binding MonsterHealth}"
-                   Margin="300,50,0,0"/>
+            <Label Content="Health: " Margin="400,50,0,0"></Label>
+            <Label x:Name="MonsterHealth" Content="{Binding MonsterCurrentlyFighting.Health}"
+                   Margin="0,50,0,0"/>
             <Image Source="{Binding MonsterImage}"
                       Width="189" Height="202"
-                      Margin="200,50,270,0"
+                      Margin="50,50,270,0"
                       HorizontalAlignment="Left" VerticalAlignment="Top"
                       Stretch="Fill"
                       RenderOptions.BitmapScalingMode="Fant"/>
@@ -35,8 +36,9 @@
                       HorizontalAlignment="Left" VerticalAlignment="Top"
                       Stretch="Fill"
                       RenderOptions.BitmapScalingMode="Fant"/>
+        <Label Content="Health: " Margin="200,300,0,0"/>
         <StackPanel Margin="200,300,0,100">
-            <Label x:Name="PlayerHp" Content="{Binding PlayerHealth}" />
+            <Label x:Name="PlayerHp" Content="{Binding NewPlayer.Health}" Margin="40,0,0,0"/>
             <Label x:Name="PlayerXp" Content="PlayerXp" />
         </StackPanel>
         <Border BorderThickness="2" Height="80" Width="400" 
@@ -45,8 +47,8 @@
 				FallbackValue=Visible, 
 				Converter={StaticResource booltoinvisconv}}"
 				BorderBrush="Black" CornerRadius="10">
-            <TextBlock Text="{Binding ActionText}"
-					   Background="White" />
+            <TextBox Text="{Binding ActionText}"
+					   Background="White"/>
         </Border>
         <Border BorderThickness="2" Height="80" Width="400" 
 			    Margin="0,330,360,0" 
@@ -55,7 +57,7 @@
 				Converter={StaticResource booltovisibilityconv}}"
 				BorderBrush="Black" CornerRadius="10">
 
-            <ListView ItemsSource="{Binding PlayerAbilitys}"
+            <ListView x:Name="ListOfPlayerAbilitys" ItemsSource="{Binding PlayerAbilitys}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>
@@ -68,15 +70,13 @@
                                ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-                <ListBox.ItemTemplate>
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
                             <Button Width="80" Margin="0,0,0,20" Height="20" 
                             Content="{Binding Name}"
 				            Background="White" 
-			                Command="{Binding AttackWithAbilityCommand,
-                            RelativeSource={RelativeSource FindAncestor,
-                            AncestorType={x:Type viewModel:GameViewViewModel}}}"
+			                Command="{Binding ElementName=ListOfPlayerAbilitys,  Path=DataContext.AttackWithAbilityCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self},
                                 Path=DataContext}"
 				            Foreground="Black">
@@ -88,7 +88,50 @@
                             </Button>
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+
+        <Border BorderThickness="2" Height="80" Width="400" 
+			    Margin="0,330,360,0" 
+                Visibility="{Binding ItemsShowing, 
+				FallbackValue=Hidden, 
+				Converter={StaticResource booltovisibilityconv}}"
+				BorderBrush="Black" CornerRadius="10">
+            <ListView x:Name="ListOfPlayerItems" ItemsSource="{Binding NewPlayer.ListOfItems}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
+                                   IsItemsHost="True" Width="400"
+                               ItemHeight="100"
+                               ItemWidth="90"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                               ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Button Width="80" Margin="0,0,0,20" Height="100" 
+				            Background="White" 
+			                Command="{Binding ElementName=ListOfPlayerAbilitys,  Path=DataContext.UseItemCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self},
+                                Path=DataContext}"
+				            Foreground="Black">
+                                <Button.Content>
+                                    <Image  Source="{Binding ItemImage}"
+                              Width="90" Height="50"
+                              HorizontalAlignment="Center"
+                              Stretch="Fill"
+                              RenderOptions.BitmapScalingMode="Fant"/>
+
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Border>
         <StackPanel Margin="600,390,0,0">
@@ -103,10 +146,12 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            
             <Button Width="150" Margin="0,0,0,0" Height="20"
                 Content="Items"
+                    IsEnabled="{Binding ItemsInBag}"
 				    Background="White" 
-					Command="{Binding GoToGameView}"
+					Command="{Binding ShowPlayerItems}"
 					Foreground="Black">
                 <Button.Resources>
                     <Style TargetType="Border">

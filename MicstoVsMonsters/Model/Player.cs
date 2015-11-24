@@ -19,6 +19,11 @@ namespace MicstoVsMonsters.Model
         private PlayerClass _playerClass;
         private ObservableCollection<Items> _listOfItems;
 
+        public Player()
+        {
+            ListOfItems = new ObservableCollection<Items>();
+        }
+
         [XmlAttribute()]
         public int ID
         {

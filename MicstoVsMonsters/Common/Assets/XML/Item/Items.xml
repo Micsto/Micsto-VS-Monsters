@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Items ID="1" Name="Health Potion" Health="10" Damage="0" Description="Heals you"  />
+</ArrayOfItems>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MicstoVsMonsters.View
 {
     /// <summary>
-    /// Interaction logic for ucPlayerAbilityButton.xaml
+    /// Interaction logic for FinishedGameView.xaml
     /// </summary>
-    public partial class ucPlayerAbilityButton : UserControl
+    public partial class FinishedGameView : UserControl
     {
-        public ucPlayerAbilityButton()
+        public FinishedGameView()
         {
             InitializeComponent();
         }

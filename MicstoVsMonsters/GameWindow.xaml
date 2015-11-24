@@ -16,7 +16,13 @@
 		<viewModel:ApplicationViewModel/>
 	</Window.DataContext>
 	<Window.Resources>
-		<DataTemplate DataType="{x:Type viewModel:GameMainMenuViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:GameOverViewModel}">
+            <view:GameOverViewxaml/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:FinishedGameViewModel}">
+            <view:FinishedGameView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:GameMainMenuViewModel}">
 			<view:GameMenuView/>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type viewModel:ChooseNewClassViewModel}">

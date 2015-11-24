@@ -60,7 +60,9 @@
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\ChooseNewClassViewModel.cs" />
     <Compile Include="ViewModel\CreateYourCharacterViewModel.cs" />
+    <Compile Include="ViewModel\FinishedGameViewModel.cs" />
     <Compile Include="ViewModel\GameMainMenuViewModel.cs" />
+    <Compile Include="ViewModel\GameOverViewModel.cs" />
     <Compile Include="ViewModel\GameViewViewModel.cs" />
     <Compile Include="ViewModel\IGameViewModel.cs" />
     <Compile Include="View\ChooseNewClassView.xaml.cs">
@@ -69,14 +71,17 @@
     <Compile Include="View\CreateYourCharacterView.xaml.cs">
       <DependentUpon>CreateYourCharacterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FinishedGameView.xaml.cs">
+      <DependentUpon>FinishedGameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GameMainMenuView.xaml.cs">
       <DependentUpon>GameMainMenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GameOverView.xaml.cs">
+      <DependentUpon>GameOverView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ucPlayerAbilityButton.xaml.cs">
-      <DependentUpon>ucPlayerAbilityButton.xaml</DependentUpon>
     </Compile>
     <Page Include="GameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,15 +105,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\FinishedGameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GameMainMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GameView.xaml">
+    <Page Include="View\GameOverView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ucPlayerAbilityButton.xaml">
+    <Page Include="View\GameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,8 +158,6 @@
     <Resource Include="Common\Assets\Images\Logo_github.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\Assets\Images\Items\" />
-    <Folder Include="Common\Assets\XML\Item\" />
     <Folder Include="Common\Assets\XML\Player\" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +196,10 @@
     <Resource Include="Common\Assets\XML\Monster\SchizofrenicWizzardAbilitys.xml" />
     <Resource Include="Common\Assets\XML\Monster\MadTechnicianAbilitys.xml" />
     <Resource Include="Common\Assets\XML\Monster\OverprotectiveFatherEarthAbilitys.xml" />
+    <Resource Include="Common\Assets\XML\Item\Items.xml" />
+    <Resource Include="Common\Assets\Images\Items\HealthPotion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Common\Assets\XML\PlayerClass\PlayerClasses.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace MicstoVsMonsters.ViewModel
 {
@@ -11,22 +12,28 @@ namespace MicstoVsMonsters.ViewModel
     {
 
         #region Private fields
+
         public Action<IGameViewModel> Navigate { get; set; }
         private Player _newPlayer;
         private PlayerClass _selectedPlayerClass;
         private DelegateCommand _fightActionInitiatedCommand;
+        private DelegateCommand _showPlayerItems;
         private DelegateCommand<Ability> _attackWithAbilityCommand;
+        private DelegateCommand<Items> _useItemCommand;
         private ObservableCollection<Ability> _playerAbilitys;
         private ObservableCollection<Monster> _monsters;
         private ObservableCollection<Ability> _monsterAbility;
         private List<string> _monsterImages;
         private Ability _playerAbility;
         private string _classImage;
+        private string _itemImage;
         private string _monsterImage;
         private string _playerHealth;
         private string _monsterHealth;
         private string _actionText;
         private bool _fightActionInitiated = false;
+        private bool _itemsShowing = false;
+        private bool _itemsInBag = true;
         private Monster _monsterCurrentlyFighting;
 
         #endregion
@@ -39,13 +46,14 @@ namespace MicstoVsMonsters.ViewModel
             Monsters = new ObservableCollection<Monster>(ReadXML(@"Common\Assets\XML\Monster\Monsters.xml", Monsters));
             foreach (var monster in Monsters)
             {
-               // Write the exact path here for your images. Havent figured out how to make this generic
-               // MonsterImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\Monster\" + monster.Name + ".png";
+                //  Write the exact path here for your images. Havent figured out how to make this generic
+                MonsterImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\Monster\" + Regex.Replace(monster.Name, @"\s+", "") + ".png";
                 monster.MonsterImage = MonsterImage;
                 MonsterImages.Add(MonsterImage);
             }
             FillMonsterAbilitysList();
             GenerateMonster();
+
         }
 
         #region Bools
@@ -60,6 +68,26 @@ namespace MicstoVsMonsters.ViewModel
             }
         }
 
+        public bool ItemsShowing
+        {
+            get { return _itemsShowing; }
+            set
+            {
+                _itemsShowing = value;
+                OnPropertyChanged(nameof(ItemsShowing));
+            }
+        }
+
+        public bool ItemsInBag
+        {
+            get { return _itemsInBag; }
+            set
+            {
+                _itemsInBag = value;
+                OnPropertyChanged(nameof(ItemsInBag));
+            }
+        }
+
         #endregion
 
         #region Strings
@@ -71,6 +99,16 @@ namespace MicstoVsMonsters.ViewModel
             {
                 _classImage = value;
                 OnPropertyChanged(nameof(ClassImage));
+            }
+        }
+
+        public string ItemImage
+        {
+            get { return _itemImage; }
+            set
+            {
+                _itemImage = value;
+                OnPropertyChanged(nameof(ItemImage));
             }
         }
 
@@ -129,7 +167,14 @@ namespace MicstoVsMonsters.ViewModel
                 NewPlayer.Health = 100;
                 PlayerHealth = "Health: " + NewPlayer.Health.ToString();
                 ActionText = "Hello " + NewPlayer.Name + " and welcome to Micsto Vs Monsters. " + System.Environment.NewLine +
-                    "Your frist opponent is: " + Monsters.Select(x => x.Name).First();
+                    "Your first opponent is: " + Monsters.Select(x => x.Name).First();
+                NewPlayer.ListOfItems = new ObservableCollection<Items>(ReadXML(@"Common\Assets\XML\Item\Items.xml", NewPlayer.ListOfItems));
+                foreach (var items in NewPlayer.ListOfItems)
+                {
+                    //  Write the exact path here for your images. Havent figured out how to make this generic
+                    ItemImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\Items\" + Regex.Replace(items.Name, @"\s+", "") + ".png";
+                    items.ItemImage = ItemImage;
+                }
             }
         }
 
@@ -152,7 +197,7 @@ namespace MicstoVsMonsters.ViewModel
                 _selectedPlayerClass = value;
                 OnPropertyChanged(nameof(SelectedPlayerClass));
                 // Write the exact path here for your images. Havent figured out how to make this generic
-                //  ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
+                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
                 PlayerAbilitys = SelectedPlayerClass.Abilitys;
             }
         }
@@ -227,7 +272,51 @@ namespace MicstoVsMonsters.ViewModel
                     Execute = ability =>
                     {
                         FightActionInitiated = false;
-                        ActionText = "You attacked with " + ability.Name + " doing " + ability.Damage + " to the enemy";
+                        MonsterCurrentlyFighting.Health -= ability.Damage;
+                        ActionText = "You attacked with " + ability.Name + " doing " + ability.Damage + " damage to the enemy";
+
+                        if (MonsterCurrentlyFighting.Health <= 0)
+                        {
+
+                            ActionText = MonsterCurrentlyFighting.Name + " is dead!";
+                            GenerateMonster();
+
+                        }
+                        else
+                        {
+                            MonsterAttacksBack();
+                        }
+                    }
+
+                });
+            }
+        }
+
+        public DelegateCommand<Items> UseItemCommand
+        {
+            get
+            {
+                return _useItemCommand ?? (_useItemCommand = new DelegateCommand<Items>
+                {
+                    Execute = item =>
+                    {
+                        ItemsShowing = false;
+                        if (item.Damage == 0)
+                        {
+                            NewPlayer.Health += item.Health;
+                            ActionText = item.Name + " just healed you for " + item.Health + " health.";
+                            NewPlayer.ListOfItems.Remove(item);
+
+                            if (NewPlayer.ListOfItems.Count == 0)
+                            {
+                                ItemsInBag = false;
+                                ActionText += " And your bag is empty.";
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Implement to add damage to the player");
+                        }
                     }
 
                 });
@@ -248,6 +337,22 @@ namespace MicstoVsMonsters.ViewModel
                 });
             }
         }
+
+        public DelegateCommand ShowPlayerItems
+        {
+            get
+            {
+                return _showPlayerItems ?? (_showPlayerItems = new DelegateCommand
+                {
+                    Execute = () =>
+                    {
+                        ItemsShowing = true;
+                    }
+
+                });
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -267,22 +372,74 @@ namespace MicstoVsMonsters.ViewModel
             AddRange(MonsterAbilitys, temp3);
 
             var temp4 = new ObservableCollection<Ability>();
-            temp3 = ReadXML(@"Common\Assets\XML\Monster\SchizofrenicWizzardAbilitys.xml", temp3);
-            AddRange(MonsterAbilitys, temp3);
+            temp4 = ReadXML(@"Common\Assets\XML\Monster\SchizofrenicWizzardAbilitys.xml", temp4);
+            AddRange(MonsterAbilitys, temp4);
 
             var temp5 = new ObservableCollection<Ability>();
-            temp3 = ReadXML(@"Common\Assets\XML\Monster\SuccubusAbilitys.xml", temp3);
-            AddRange(MonsterAbilitys, temp3);
+            temp5 = ReadXML(@"Common\Assets\XML\Monster\SuccubusAbilitys.xml", temp5);
+            AddRange(MonsterAbilitys, temp5);
         }
 
         public void GenerateMonster()
         {
-            MonsterCurrentlyFighting = new Monster();
-            MonsterCurrentlyFighting = Monsters.First();
-            MonsterImage = MonsterCurrentlyFighting.MonsterImage;
-            MonsterHealth = "Monster Health: " + MonsterCurrentlyFighting.Health.ToString();
-            MonsterCurrentlyFighting.MonsterAbilitys = new ObservableCollection<Ability>(MonsterAbilitys.Where(x => x.MonsterID == MonsterCurrentlyFighting.ID));
+
+            if (MonsterCurrentlyFighting == null)
+            {
+                MonsterCurrentlyFighting = new Monster();
+                MonsterCurrentlyFighting = Monsters.First();
+                MonsterImage = MonsterCurrentlyFighting.MonsterImage;
+                MonsterCurrentlyFighting.MonsterAbilitys =
+                    new ObservableCollection<Ability>(
+                        MonsterAbilitys.Where(x => x.MonsterID == MonsterCurrentlyFighting.ID));
+            }
+
+            else
+            {
+                if (MonsterCurrentlyFighting.ID == 5)
+                {
+                    Navigate(new FinishedGameViewModel { Navigate = Navigate });
+                }
+                else
+                {
+                    int index;
+                    if (MonsterCurrentlyFighting.ID == 4)
+                    {
+                        index = 4;
+                        Monsters.Add(new Monster());
+                    }
+                    else
+                        index = MonsterCurrentlyFighting.ID;
+
+                    MonsterCurrentlyFighting = new Monster();
+                    MonsterCurrentlyFighting = Monsters[index == -1 ? 0 : index % (Monsters.Count - 1)];
+                    MonsterImage = MonsterCurrentlyFighting.MonsterImage;
+                    MonsterCurrentlyFighting.MonsterAbilitys = new ObservableCollection<Ability>(MonsterAbilitys.Where(x => x.MonsterID == MonsterCurrentlyFighting.ID));
+                    ActionText += " New monster is " + MonsterCurrentlyFighting.Name;
+
+                    if (Monsters.Count > 5)
+                        Monsters.RemoveAt(5);
+                }
+
+            }
+
+
         }
+
+        public void MonsterAttacksBack()
+        {
+            Shuffle(MonsterCurrentlyFighting.MonsterAbilitys);
+            var monsterAttack = MonsterCurrentlyFighting.MonsterAbilitys.First();
+            NewPlayer.Health -= monsterAttack.Damage;
+            ActionText = MonsterCurrentlyFighting.Name + " attacked you with " + monsterAttack.Name + " doing " +
+                         monsterAttack.Damage + " damage.";
+            if (NewPlayer.Health <= 0)
+            {
+                ActionText = "You died, pleb.";
+                Navigate(new GameOverViewModel { Navigate = Navigate });
+            }
+        }
+
+
     }
 
     #endregion

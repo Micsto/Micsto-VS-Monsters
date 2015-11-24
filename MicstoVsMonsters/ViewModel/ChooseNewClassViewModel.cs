@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace MicstoVsMonsters.ViewModel
 {
@@ -27,8 +28,7 @@ namespace MicstoVsMonsters.ViewModel
             foreach (var PlayerClass in ListOfPlayerClasses)
             {
                 // TODO: Make this string more generic. not hard coded where the path is.
-                // Write the exact path here for your images. Havent figured out how to make this generic
-                // ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + PlayerClass.Name + ".png";
+                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + PlayerClass.Name + ".png";
                 PlayerClass.ClassImage = ClassImage;
             }
             PlayerClassAbilitys = new ObservableCollection<Ability>();
@@ -102,11 +102,19 @@ namespace MicstoVsMonsters.ViewModel
                 {
                     Execute = () =>
                     {
-                        Navigate(new CreateYourCharacterViewModel
+                        if (SelectedPlayerClass != null)
                         {
-                            Navigate = Navigate,
-                            SelectedPlayerClass = SelectedPlayerClass
-                        });
+                            Navigate(new CreateYourCharacterViewModel
+                            {
+                                Navigate = Navigate,
+                                SelectedPlayerClass = SelectedPlayerClass
+                            });
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please choose a player class");
+                        }
+
                     }
 
                 });

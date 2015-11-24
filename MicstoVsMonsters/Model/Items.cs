@@ -17,7 +17,7 @@ namespace MicstoVsMonsters.Model
         private int _health;
         private int _damage;
         private string _description;
-        private ImageSource _itemImage;
+        private string _itemImage;
 
         [XmlAttribute()]
         public int ID
@@ -74,7 +74,7 @@ namespace MicstoVsMonsters.Model
             }
         }
 
-        public ImageSource ItemImage
+        public string ItemImage
         {
             get { return _itemImage; }
             set
