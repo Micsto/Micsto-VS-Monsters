@@ -24,11 +24,13 @@ namespace MicstoVsMonsters.ViewModel
         public ChooseNewClassViewModel()
         {
             ClassDescription = "...";
-            ListOfPlayerClasses = new ObservableCollection<PlayerClass>(ReadXML(@"Common\Assets\XML\PlayerClass\PlayerClasses.xml", ListOfPlayerClasses));
+
+            ListOfPlayerClasses = new ObservableCollection<PlayerClass>(ReadXML(@"\Common\Assets\XML\PlayerClass\PlayerClasses.xml", ListOfPlayerClasses));
+
             foreach (var PlayerClass in ListOfPlayerClasses)
             {
                 // TODO: Make this string more generic. not hard coded where the path is.
-                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + PlayerClass.Name + ".png";
+                ClassImage = @"\Common\Assets\Images\PlayerClass\" + PlayerClass.Name + ".png";
                 PlayerClass.ClassImage = ClassImage;
             }
             PlayerClassAbilitys = new ObservableCollection<Ability>();
@@ -87,6 +89,7 @@ namespace MicstoVsMonsters.ViewModel
                 _SelectedPlayerClass = value;
                 OnPropertyChanged(nameof(SelectedPlayerClass));
                 SelectedPlayerClass.Abilitys = new ObservableCollection<Ability>(PlayerClassAbilitys.Where(x => x.PlayerClassID == SelectedPlayerClass.ID));
+
                 StringBuilder builder = SelectedPlayerClass.Abilitys.Select(x => x.Name).Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + ", "));
                 ClassDescription = SelectedPlayerClass.Name + ": " + SelectedPlayerClass.Description + System.Environment.NewLine + "Abilitys: " +
                     builder;

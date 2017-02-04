@@ -43,11 +43,10 @@ namespace MicstoVsMonsters.ViewModel
             MonsterImages = new List<string>();
             PlayerAbilitys = new ObservableCollection<Ability>();
             MonsterAbilitys = new ObservableCollection<Ability>();
-            Monsters = new ObservableCollection<Monster>(ReadXML(@"Common\Assets\XML\Monster\Monsters.xml", Monsters));
+            Monsters = new ObservableCollection<Monster>(ReadXML(@"\Common\Assets\XML\Monster\Monsters.xml", Monsters));
             foreach (var monster in Monsters)
             {
-                //  Write the exact path here for your images. Havent figured out how to make this generic
-                MonsterImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\Monster\" + Regex.Replace(monster.Name, @"\s+", "") + ".png";
+                MonsterImage = @"\Common\Assets\Images\Monster\" + Regex.Replace(monster.Name, @"\s+", "") + ".png";
                 monster.MonsterImage = MonsterImage;
                 MonsterImages.Add(MonsterImage);
             }
@@ -172,7 +171,7 @@ namespace MicstoVsMonsters.ViewModel
                 foreach (var items in NewPlayer.ListOfItems)
                 {
                     //  Write the exact path here for your images. Havent figured out how to make this generic
-                    ItemImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\Items\" + Regex.Replace(items.Name, @"\s+", "") + ".png";
+                    ItemImage = @"\Common\Assets\Images\Items\" + Regex.Replace(items.Name, @"\s+", "") + ".png";
                     items.ItemImage = ItemImage;
                 }
             }
@@ -197,7 +196,7 @@ namespace MicstoVsMonsters.ViewModel
                 _selectedPlayerClass = value;
                 OnPropertyChanged(nameof(SelectedPlayerClass));
                 // Write the exact path here for your images. Havent figured out how to make this generic
-                ClassImage = @"C:\MyCode\MicstoVsMonsters\MicstoVsMonsters\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
+                ClassImage = @"\Common\Assets\Images\PlayerClass\" + SelectedPlayerClass.Name + ".png";
                 PlayerAbilitys = SelectedPlayerClass.Abilitys;
             }
         }
@@ -360,23 +359,23 @@ namespace MicstoVsMonsters.ViewModel
         public void FillMonsterAbilitysList()
         {
             var temp = new ObservableCollection<Ability>();
-            temp = ReadXML(@"Common\Assets\XML\Monster\DementedMonkAbilitys.xml", temp);
+            temp = ReadXML(@"\Common\Assets\XML\Monster\DementedMonkAbilitys.xml", temp);
             AddRange(MonsterAbilitys, temp);
 
             var temp2 = new ObservableCollection<Ability>();
-            temp2 = ReadXML(@"Common\Assets\XML\Monster\MadTechnicianAbilitys.xml", temp2);
+            temp2 = ReadXML(@"\Common\Assets\XML\Monster\MadTechnicianAbilitys.xml", temp2);
             AddRange(MonsterAbilitys, temp2);
 
             var temp3 = new ObservableCollection<Ability>();
-            temp3 = ReadXML(@"Common\Assets\XML\Monster\OverprotectiveFatherEarthAbilitys.xml", temp3);
+            temp3 = ReadXML(@"\Common\Assets\XML\Monster\OverprotectiveFatherEarthAbilitys.xml", temp3);
             AddRange(MonsterAbilitys, temp3);
 
             var temp4 = new ObservableCollection<Ability>();
-            temp4 = ReadXML(@"Common\Assets\XML\Monster\SchizofrenicWizzardAbilitys.xml", temp4);
+            temp4 = ReadXML(@"\Common\Assets\XML\Monster\SchizofrenicWizzardAbilitys.xml", temp4);
             AddRange(MonsterAbilitys, temp4);
 
             var temp5 = new ObservableCollection<Ability>();
-            temp5 = ReadXML(@"Common\Assets\XML\Monster\SuccubusAbilitys.xml", temp5);
+            temp5 = ReadXML(@"\Common\Assets\XML\Monster\SuccubusAbilitys.xml", temp5);
             AddRange(MonsterAbilitys, temp5);
         }
 

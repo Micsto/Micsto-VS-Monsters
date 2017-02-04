@@ -60,7 +60,7 @@ namespace MicstoVsMonsters.Common
         public ObservableCollection<T> ReadXML<T>(string path, ObservableCollection<T> observableCollection)
         {
 
-            var Xmlpath = AppDomain.CurrentDomain.BaseDirectory + path;
+            string Xmlpath = AppDomain.CurrentDomain.BaseDirectory + path;
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<T>));
             ObservableCollection<T> deserialized;
             using (StreamReader reader = new StreamReader(Xmlpath))
